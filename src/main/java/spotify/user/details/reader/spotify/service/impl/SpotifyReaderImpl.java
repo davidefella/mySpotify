@@ -8,18 +8,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import spotify.user.details.reader.spotify.configuration.APIAddressHandler;
-import spotify.user.details.reader.spotify.security.TokenGenerator;
+import spotify.user.details.reader.spotify.security.TokenHandler;
 import spotify.user.details.reader.spotify.service.api.SpotifyReader;
 
 @Service
 public class SpotifyReaderImpl implements SpotifyReader {
 
-  public String readArtistsStatistics() {
-    final String accessToken = TokenGenerator.token;
-    final String astrstisEndPoint = APIAddressHandler.artistsAdress;
+  public String readArtistsStatistics()  {
+
+    TokenHandler th = new TokenHandler();
+
+    final String accessToken = th.getBearerToken();
+    final String astrstisEndPoint = APIAddressHandler.GET_ARTISTS_URI;
 
     HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
+    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
     headers.set("Authorization", "Bearer " + accessToken);
 
     HttpEntity<String> entity = new HttpEntity<String>(headers);
