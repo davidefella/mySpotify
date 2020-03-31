@@ -15,25 +15,24 @@ import spotify.user.details.reader.spotify.service.api.SpotifyReader;
 public class SpotifyReaderImpl implements SpotifyReader {
 
   public String readArtistsStatistics()  {
-
     TokenHandler th = new TokenHandler();
 
     final String accessToken = th.getBearerToken();
-    final String astrstisEndPoint = APIAddressHandler.GET_ARTISTS_URI;
+    final String artistsServiceEndPoint = APIAddressHandler.GET_ARTISTS_URI;
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
     headers.set("Authorization", "Bearer " + accessToken);
 
-    HttpEntity<String> entity = new HttpEntity<String>(headers);
+    HttpEntity<String> entity = new HttpEntity<>(headers);
 
     RestTemplate restTemplate = new RestTemplate();
     String fooResourceUrl
-        = astrstisEndPoint;
+        = artistsServiceEndPoint;
 
     ResponseEntity<String> responseEntity = restTemplate
         .exchange(fooResourceUrl, HttpMethod.GET, entity, String.class);
 
-    return responseEntity.toString();
+    return responseEntity.getBody().toString();
   }
 }
