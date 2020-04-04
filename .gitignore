@@ -32,3 +32,5 @@ gradle-app.setting
 
 /.idea/
 /.gradle/
+
+/src/main/resources/token/

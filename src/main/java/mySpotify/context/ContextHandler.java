@@ -1,4 +1,4 @@
-package spotify.user.details.reader.context;
+package mySpotify.context;
 
 public class ContextHandler {
 

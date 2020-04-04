@@ -1,4 +1,4 @@
-package spotify.user.details.reader.controller.api;
+package mySpotify.controller.api;
 
 public interface StatisticsReader {
 

@@ -1,4 +1,4 @@
-package spotify.user.details.reader.spotify.service.api;
+package mySpotify.spotify.service.api;
 
 public interface SpotifyReader {
 

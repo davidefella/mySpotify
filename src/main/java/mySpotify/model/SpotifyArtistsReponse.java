@@ -1,4 +1,4 @@
-package spotify.user.details.reader.model;
+package mySpotify.model;
 
 import java.util.ArrayList;
 import java.util.List;

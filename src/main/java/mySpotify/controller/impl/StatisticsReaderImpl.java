@@ -1,13 +1,13 @@
-package spotify.user.details.reader.controller.impl;
+package mySpotify.controller.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mySpotify.controller.api.StatisticsReader;
+import mySpotify.model.SpotifyArtistsReponse;
+import mySpotify.parser.ArtistsParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import spotify.user.details.reader.controller.api.StatisticsReader;
-import spotify.user.details.reader.model.SpotifyArtistsReponse;
-import spotify.user.details.reader.parser.ArtistsParser;
 
 @RestController
 public class StatisticsReaderImpl implements StatisticsReader {

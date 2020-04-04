@@ -1,4 +1,4 @@
-package spotify.user.details.reader.spotify.security;
+package mySpotify.spotify.security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
-import spotify.user.details.reader.spotify.configuration.APIAddressHandler;
-import spotify.user.details.reader.spotify.model.SpotifyAuthResponse;
+import mySpotify.spotify.configuration.APIAddressHandler;
+import mySpotify.spotify.model.SpotifyAuthResponse;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

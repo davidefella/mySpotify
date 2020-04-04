@@ -1,5 +1,6 @@
-package spotify.user.details.reader.spotify.service.impl;
+package mySpotify.spotify.service.impl;
 
+import mySpotify.spotify.service.api.SpotifyReader;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -7,9 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import spotify.user.details.reader.spotify.configuration.APIAddressHandler;
-import spotify.user.details.reader.spotify.security.TokenGenerator;
-import spotify.user.details.reader.spotify.service.api.SpotifyReader;
+import mySpotify.spotify.configuration.APIAddressHandler;
+import mySpotify.spotify.security.TokenGenerator;
 
 @Service
 public class SpotifyReaderImpl implements SpotifyReader {

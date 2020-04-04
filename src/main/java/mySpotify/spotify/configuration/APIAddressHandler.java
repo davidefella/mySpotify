@@ -1,4 +1,4 @@
-package spotify.user.details.reader.spotify.configuration;
+package mySpotify.spotify.configuration;
 
 public class APIAddressHandler {
   public static String GET_ARTISTS_URI = "https://api.spotify.com/v1/me/top/artists";

@@ -1,8 +1,8 @@
-package spotify.user.details.reader.parser;
+package mySpotify.parser;
 
+import mySpotify.spotify.service.api.SpotifyReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spotify.user.details.reader.spotify.service.api.SpotifyReader;
 
 @Service
 public class ArtistsParser {
