@@ -1,6 +1,8 @@
 package mySpotify.controller.api;
 
+import java.util.List;
+
 public interface StatisticsReader {
 
-  String getArtistsStatistics();
+  List<String> getArtistsStatistics();
 }

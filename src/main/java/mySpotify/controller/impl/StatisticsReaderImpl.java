@@ -1,9 +1,7 @@
 package mySpotify.controller.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 import mySpotify.controller.api.StatisticsReader;
-import mySpotify.model.SpotifyArtistsReponse;
 import mySpotify.parser.ArtistsParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +14,8 @@ public class StatisticsReaderImpl implements StatisticsReader {
   ArtistsParser artistsParser;
 
   @GetMapping("/getArtistsStats")
-  public String getArtistsStatistics() {
-    String res = artistsParser.getArtistsFromSpotify();
-
-    ObjectMapper mapper = new ObjectMapper();
-    SpotifyArtistsReponse spotifyArtistsReponse = null;
-    try {
-      spotifyArtistsReponse = mapper.readValue(res, SpotifyArtistsReponse.class);
-    } catch (JsonProcessingException e) {
-      e.printStackTrace();
-    }
+  public List<String> getArtistsStatistics() {
+    List<String> res = artistsParser.getArtistsFromSpotify();
 
     return res;
   }
