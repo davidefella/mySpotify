@@ -1,25 +1,14 @@
-package mySpotify.model.ArtistsResponse;
+package mySpotify.model.Tracks;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Items {
+public class Artists {
 
   private External_urls external_urls;
-
-  private Followers followers;
-
-  private List<String> genres;
 
   private String href;
 
   private String id;
 
-  private List<Images> images;
-
   private String name;
-
-  private int popularity;
 
   private String type;
 
@@ -31,22 +20,6 @@ public class Items {
 
   public External_urls getExternal_urls() {
     return this.external_urls;
-  }
-
-  public void setFollowers(Followers followers) {
-    this.followers = followers;
-  }
-
-  public Followers getFollowers() {
-    return this.followers;
-  }
-
-  public void setGenres(List<String> genres) {
-    this.genres = genres;
-  }
-
-  public List<String> getGenres() {
-    return this.genres;
   }
 
   public void setHref(String href) {
@@ -65,28 +38,12 @@ public class Items {
     return this.id;
   }
 
-  public void setImages(List<Images> images) {
-    this.images = images;
-  }
-
-  public List<Images> getImages() {
-    return this.images;
-  }
-
   public void setName(String name) {
     this.name = name;
   }
 
   public String getName() {
     return this.name;
-  }
-
-  public void setPopularity(int popularity) {
-    this.popularity = popularity;
-  }
-
-  public int getPopularity() {
-    return this.popularity;
   }
 
   public void setType(String type) {
@@ -105,4 +62,3 @@ public class Items {
     return this.uri;
   }
 }
-

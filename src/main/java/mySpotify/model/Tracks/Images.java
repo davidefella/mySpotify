@@ -1,4 +1,4 @@
-package mySpotify.model.ArtistsResponse;
+package mySpotify.model.Tracks;
 
 public class Images {
 
@@ -32,4 +32,3 @@ public class Images {
     return this.width;
   }
 }
-

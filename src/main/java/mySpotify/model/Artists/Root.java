@@ -1,4 +1,4 @@
-package mySpotify.model.ArtistsResponse;
+package mySpotify.model.Artists;
 
 import java.util.List;
 
