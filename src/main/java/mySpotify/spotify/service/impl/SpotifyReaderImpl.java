@@ -7,32 +7,37 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import mySpotify.spotify.configuration.APIAddressHandler;
 import mySpotify.spotify.security.TokenGenerator;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class SpotifyReaderImpl implements SpotifyReader {
 
-  public String readArtistsStatistics()  {
+  /*
+   * https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
+   * */
+  public String readArtistsStatistics() {
     TokenGenerator th = new TokenGenerator();
+    RestTemplate restTemplate = new RestTemplate();
 
-    final String accessToken = th.getBearerToken();
-    final String artistsServiceEndPoint = APIAddressHandler.GET_ARTISTS_URI;
+    String accessToken = th.getBearerToken();
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
     headers.set("Authorization", "Bearer " + accessToken);
 
-    HttpEntity<String> entity = new HttpEntity<>(headers);
+    HttpEntity<LinkedMultiValueMap<String, String>> request = new HttpEntity<>(headers);
 
-    RestTemplate restTemplate = new RestTemplate();
-    String fooResourceUrl
-        = artistsServiceEndPoint;
+    UriComponentsBuilder builder = UriComponentsBuilder
+        .fromUriString(APIAddressHandler.GET_ARTISTS_URI).queryParam("limit", "5")
+        .queryParam("time_range", "short_term");
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(fooResourceUrl, HttpMethod.GET, entity, String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, request, String.class);
 
-    return responseEntity.getBody().toString();
+    return responseEntity.getBody();
   }
 }
