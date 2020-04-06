@@ -29,9 +29,3 @@ build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
-
-/.idea/
-/.gradle/
-
-/src/main/resources/token/
-src/main/resources/token/
