@@ -14,22 +14,67 @@ import mySpotify.spotify.configuration.APIAddressHandler;
 import mySpotify.spotify.security.TokenGenerator;
 import org.springframework.web.util.UriComponentsBuilder;
 
+/*
+ * https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
+ * */
+
+/*
+ * @TODO: Refactor and split this class, from artists and from tracks
+ * */
 @Service
 public class SpotifyReaderImpl implements SpotifyReader {
 
   @Autowired
   TokenGenerator tokenGenerator;
 
-  /*
-   * https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
-   * */
-  public String readArtistsStatistics() {
+
+  public String readDefaultArtistsStatistics() {
 
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_ARTISTS_URI).queryParam("limit", "5")
-        .queryParam("time_range", "short_term");
+        .fromUriString(APIAddressHandler.GET_ARTISTS_URI);
+
+    ResponseEntity<String> responseEntity = restTemplate
+        .exchange(builder.toUriString(), HttpMethod.GET, getBearerHttpEntity(), String.class);
+
+    return responseEntity.getBody();
+  }
+
+  public String readArtistsStatistics(int artistsNumber) {
+
+    RestTemplate restTemplate = new RestTemplate();
+
+    UriComponentsBuilder builder = UriComponentsBuilder
+        .fromUriString(APIAddressHandler.GET_ARTISTS_URI).queryParam("limit", artistsNumber);
+
+    ResponseEntity<String> responseEntity = restTemplate
+        .exchange(builder.toUriString(), HttpMethod.GET, getBearerHttpEntity(), String.class);
+
+    return responseEntity.getBody();
+  }
+
+  public String readArtistsStatistics(int artistsNumber, String timeRange) {
+
+    RestTemplate restTemplate = new RestTemplate();
+
+    UriComponentsBuilder builder = UriComponentsBuilder
+        .fromUriString(APIAddressHandler.GET_ARTISTS_URI).queryParam("limit", artistsNumber)
+        .queryParam("time_range", mapTermRequest(timeRange));
+
+    ResponseEntity<String> responseEntity = restTemplate
+        .exchange(builder.toUriString(), HttpMethod.GET, getBearerHttpEntity(), String.class);
+
+    return responseEntity.getBody();
+  }
+
+  public String readArtistsStatistics(String timeRange) {
+
+    RestTemplate restTemplate = new RestTemplate();
+
+    UriComponentsBuilder builder = UriComponentsBuilder
+        .fromUriString(APIAddressHandler.GET_ARTISTS_URI)
+        .queryParam("time_range", mapTermRequest(timeRange));
 
     ResponseEntity<String> responseEntity = restTemplate
         .exchange(builder.toUriString(), HttpMethod.GET, getBearerHttpEntity(), String.class);
@@ -58,5 +103,15 @@ public class SpotifyReaderImpl implements SpotifyReader {
     HttpEntity<LinkedMultiValueMap<String, String>> request = new HttpEntity<>(header);
 
     return request;
+  }
+
+  private String mapTermRequest(String requestTerm) {
+    if (requestTerm.equals("short")) {
+      return "short_term";
+    } else if (requestTerm.equals("medium")) {
+      return "medium_term";
+    } else {
+      return "long_term";
+    }
   }
 }

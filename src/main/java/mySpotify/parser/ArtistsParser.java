@@ -15,9 +15,30 @@ public class ArtistsParser {
   @Autowired
   ArtistsMapper artistsMapper;
 
-  public List<String> getArtistsFromSpotify() {
+  public List<String> getDefaultArtistsFromSpotify() {
 
-    String artists = spotifyReader.readArtistsStatistics();
+    String artists = spotifyReader.readDefaultArtistsStatistics();
+
+    return artistsMapper.mapArtistFromResponse(artists);
+  }
+
+  public List<String> getArtistsFromSpotify(int artistsNumber) {
+
+    String artists = spotifyReader.readArtistsStatistics(artistsNumber);
+
+    return artistsMapper.mapArtistFromResponse(artists);
+  }
+
+  public List<String> getArtistsFromSpotify(String timeRange) {
+
+    String artists = spotifyReader.readArtistsStatistics(timeRange);
+
+    return artistsMapper.mapArtistFromResponse(artists);
+  }
+
+  public List<String> getArtistsFromSpotify(int artistsNumber, String term) {
+
+    String artists = spotifyReader.readArtistsStatistics(artistsNumber, term);
 
     return artistsMapper.mapArtistFromResponse(artists);
   }
