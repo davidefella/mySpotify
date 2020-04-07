@@ -1,9 +1,8 @@
-package mySpotify.spotify.security;
+package mySpotify.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.FileReader;
-import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -12,33 +11,23 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import mySpotify.spotify.configuration.APIAddressHandler;
-import mySpotify.spotify.model.SpotifyAuthResponse;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import mySpotify.model.Spotify.SpotifyAuthResponse;
 
 @Service
 public final class TokenGenerator {
 
-  private final String filePath = "./src/main/resources/token/tokens.json";
   SpotifyAuthResponse spotifyAuthResponse;
+
+  @Autowired
+  MySpotifyUtils mySpotifyUtils;
 
   @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
   public String getBearerToken() {
-    JSONParser parser = new JSONParser();
-    Object objParsed;
 
-    try {
-      objParsed = parser.parse(new FileReader(filePath));
-      JSONObject jsonObject = (JSONObject) objParsed;
-      spotifyAuthResponse = this
-          .getNewBearerTokenFromRefreshToken(jsonObject.get("refresh_token").toString());
+    String refreshToken = mySpotifyUtils.readRefreshToken();
 
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
+    spotifyAuthResponse = this
+        .getNewBearerTokenFromRefreshToken(refreshToken);
 
     return spotifyAuthResponse.getAccess_token();
   }
@@ -59,7 +48,7 @@ public final class TokenGenerator {
 
     RestTemplate restTemplate = new RestTemplate();
     ResponseEntity<String> result = restTemplate
-        .postForEntity(APIAddressHandler.AUTHORIZE_URI, request, String.class);
+        .postForEntity(mySpotifyUtils.readAuthorizationEndpoints(), request, String.class);
 
     ObjectMapper mapper = new ObjectMapper();
 
@@ -72,18 +61,16 @@ public final class TokenGenerator {
     return spotifyAuthResponse;
   }
 
-  /* To take the auth code from the first step*/
+  /* To take the auth code from the first step
   private SpotifyAuthResponse getAuthResponse() {
     SpotifyAuthResponse spotifyAuthResponse = null;
 
     final String GRANT_TYPE = "authorization_code";
     final String CONTENT_TYPE = "application/x-www-form-urlencoded";
 
-    /* TODO: From the first service*/
-    String code = "AQAOnO9szRjB7pQJiIAhROnZ_C0ZBxgMOtrkYZnm8fFuqJk_UyKNeH33gX1FHPiqur9PuZOD68ZNL7umodlVWDPf_GAHehGY-7CWtfCNxE48yd3ZqXA4RMjxQFqfR8SR1gkSEmuFNDh-UvMuZjq7eqjJ2Bumvw9_V8yItDHsuXNKW3lvBm7jl0eI4xBUD7QI4yr0TZnJe72sxdpl3_Jyvw";
+    String code = "";
 
-    /* TODO: Calculate from base64 transformation*/
-    String authorizationCode = "NjA1ZTgxNzIzMDRmNDM0MWFlNGEzMWI4MmFjMzdkYjI6NmMxYjBmOTA5YzNmNGQwNzk3Y2YyNjU0NTdhZmVhMmU=";
+    String authorizationCode = mySpotifyUtils.readAuthorizationCode();
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("content-type", CONTENT_TYPE);
@@ -109,5 +96,5 @@ public final class TokenGenerator {
     }
 
     return spotifyAuthResponse;
-  }
+  }*/
 }

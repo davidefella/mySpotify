@@ -1,13 +1,12 @@
 package mySpotify.spotify.service.impl;
 
 import mySpotify.spotify.service.api.ArtistsSpotifyReader;
-import mySpotify.util.Utils;
+import mySpotify.util.MySpotifyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import mySpotify.spotify.configuration.APIAddressHandler;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /*
@@ -21,18 +20,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
 
   @Autowired
-  Utils utils;
-
+  MySpotifyUtils mySpotifyUtils;
 
   public String readDefaultArtistsStatistics() {
 
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_ARTISTS_URI);
+        .fromUriString(mySpotifyUtils.readArtistsEndpoints());
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
 
     return responseEntity.getBody();
   }
@@ -42,10 +41,11 @@ public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_ARTISTS_URI).queryParam("limit", artistsNumber);
+        .fromUriString(mySpotifyUtils.readArtistsEndpoints()).queryParam("limit", artistsNumber);
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
 
     return responseEntity.getBody();
   }
@@ -55,11 +55,12 @@ public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_ARTISTS_URI).queryParam("limit", artistsNumber)
-        .queryParam("time_range", utils.mapTermRequest(timeRange));
+        .fromUriString(mySpotifyUtils.readArtistsEndpoints()).queryParam("limit", artistsNumber)
+        .queryParam("time_range", mySpotifyUtils.mapTermRequest(timeRange));
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
 
     return responseEntity.getBody();
   }
@@ -69,27 +70,13 @@ public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_ARTISTS_URI)
-        .queryParam("time_range", utils.mapTermRequest(timeRange));
+        .fromUriString(mySpotifyUtils.readArtistsEndpoints())
+        .queryParam("time_range", mySpotifyUtils.mapTermRequest(timeRange));
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
 
     return responseEntity.getBody();
   }
-
-  /*  TRACKS    */
-  public String readDefaultTracksStatistics() {
-    RestTemplate restTemplate = new RestTemplate();
-
-    UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_TRACKS_URI).queryParam("limit", "10")
-        .queryParam("time_range", "long_term");
-
-    ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
-
-    return responseEntity.getBody();
-  }
-
 }

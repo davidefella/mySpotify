@@ -1,0 +1,5 @@
+{
+  "artists": "https://api.spotify.com/v1/me/top/artists",
+  "token": "https://accounts.spotify.com/api/token",
+  "tracks": "https://api.spotify.com/v1/me/top/tracks"
+}

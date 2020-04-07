@@ -1,4 +1,4 @@
-package mySpotify.spotify.model;
+package mySpotify.model.Spotify;
 
   public class SpotifyAuthResponse {
     private String access_token;

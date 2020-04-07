@@ -1,8 +1,7 @@
 package mySpotify.spotify.service.impl;
 
-import mySpotify.spotify.configuration.APIAddressHandler;
 import mySpotify.spotify.service.api.TracksSpotifyReader;
-import mySpotify.util.Utils;
+import mySpotify.util.MySpotifyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -21,31 +20,32 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class TracksSpotifyReaderImpl implements TracksSpotifyReader {
 
   @Autowired
-  Utils utils;
+  MySpotifyUtils mySpotifyUtils;
 
   public String readDefaultTracksStatistics() {
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_TRACKS_URI).queryParam("limit", "10")
+        .fromUriString(mySpotifyUtils.readTracksEndpoints()).queryParam("limit", "10")
         .queryParam("time_range", "long_term");
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
 
     return responseEntity.getBody();
   }
-
 
   @Override
   public String readTracksStatistics(int tracksNumber) {
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_TRACKS_URI).queryParam("limit", tracksNumber);
+        .fromUriString(mySpotifyUtils.readTracksEndpoints()).queryParam("limit", tracksNumber);
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
 
     return responseEntity.getBody();
   }
@@ -55,11 +55,12 @@ public class TracksSpotifyReaderImpl implements TracksSpotifyReader {
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_TRACKS_URI).queryParam("limit", tracksNumber)
-        .queryParam("time_range", utils.mapTermRequest(timeRange));
+        .fromUriString(mySpotifyUtils.readTracksEndpoints()).queryParam("limit", tracksNumber)
+        .queryParam("time_range", mySpotifyUtils.mapTermRequest(timeRange));
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
 
     return responseEntity.getBody();
   }
@@ -69,11 +70,12 @@ public class TracksSpotifyReaderImpl implements TracksSpotifyReader {
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
-        .fromUriString(APIAddressHandler.GET_TRACKS_URI)
-        .queryParam("time_range", utils.mapTermRequest(timeRange));
+        .fromUriString(mySpotifyUtils.readTracksEndpoints())
+        .queryParam("time_range", mySpotifyUtils.mapTermRequest(timeRange));
 
     ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, utils.getBearerHttpEntity(), String.class);
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
 
     return responseEntity.getBody();
   }
