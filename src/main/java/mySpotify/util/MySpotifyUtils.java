@@ -8,9 +8,13 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class MySpotifyUtils {
@@ -20,6 +24,19 @@ public class MySpotifyUtils {
 
   @Autowired
   TokenGenerator tokenGenerator;
+
+  @Autowired
+  MySpotifyUtils mySpotifyUtils;
+
+  public String buildResponseEntity(UriComponentsBuilder builder) {
+    RestTemplate restTemplate = new RestTemplate();
+
+    ResponseEntity<String> responseEntity = restTemplate
+        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
+            String.class);
+
+    return responseEntity.getBody();
+  }
 
   public HttpEntity<LinkedMultiValueMap<String, String>> getBearerHttpEntity() {
     HttpHeaders header = new HttpHeaders();
@@ -48,28 +65,28 @@ public class MySpotifyUtils {
     return jsonObject.get(Consts.REFRESH_TOKEN).toString();
   }
 
-  public String readTracksEndpoints(){
+  public String readTracksEndpoints() {
     JSONObject jsonObject = parseJsonFile(spotifyServices);
 
     return jsonObject.get(Consts.TRACKS_ENDPOINTS).toString();
   }
 
-  public String readArtistsEndpoints(){
+  public String readArtistsEndpoints() {
     JSONObject jsonObject = parseJsonFile(spotifyServices);
 
     return jsonObject.get(Consts.ARTISTS_ENDPOINTS).toString();
   }
 
-  public String readAuthorizationEndpoints(){
+  public String readAuthorizationEndpoints() {
     JSONObject jsonObject = parseJsonFile(spotifyServices);
 
     return jsonObject.get(Consts.TOKEN_ENDPOINTS).toString();
   }
 
   private JSONObject parseJsonFile(String path) {
-
     JSONParser parser = new JSONParser();
     Object objParsed = null;
+
     try {
       objParsed = parser.parse(new FileReader(path));
     } catch (IOException e) {
@@ -78,9 +95,6 @@ public class MySpotifyUtils {
       e.printStackTrace();
     }
 
-    JSONObject jsonObject = (JSONObject) objParsed;
-
-    return jsonObject;
-
+    return (JSONObject) objParsed;
   }
 }

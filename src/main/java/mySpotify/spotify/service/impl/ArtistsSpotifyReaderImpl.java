@@ -3,10 +3,7 @@ package mySpotify.spotify.service.impl;
 import mySpotify.spotify.service.api.ArtistsSpotifyReader;
 import mySpotify.util.MySpotifyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /*
@@ -24,59 +21,35 @@ public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
 
   public String readDefaultArtistsStatistics() {
 
-    RestTemplate restTemplate = new RestTemplate();
-
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readArtistsEndpoints());
 
-    ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
-            String.class);
-
-    return responseEntity.getBody();
+    return mySpotifyUtils.buildResponseEntity(builder);
   }
 
   public String readArtistsStatistics(int artistsNumber) {
 
-    RestTemplate restTemplate = new RestTemplate();
-
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readArtistsEndpoints()).queryParam("limit", artistsNumber);
 
-    ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
-            String.class);
-
-    return responseEntity.getBody();
+    return mySpotifyUtils.buildResponseEntity(builder);
   }
 
   public String readArtistsStatistics(int artistsNumber, String timeRange) {
-
-    RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readArtistsEndpoints()).queryParam("limit", artistsNumber)
         .queryParam("time_range", mySpotifyUtils.mapTermRequest(timeRange));
 
-    ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
-            String.class);
-
-    return responseEntity.getBody();
+    return mySpotifyUtils.buildResponseEntity(builder);
   }
 
   public String readArtistsStatistics(String timeRange) {
-
-    RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readArtistsEndpoints())
         .queryParam("time_range", mySpotifyUtils.mapTermRequest(timeRange));
 
-    ResponseEntity<String> responseEntity = restTemplate
-        .exchange(builder.toUriString(), HttpMethod.GET, mySpotifyUtils.getBearerHttpEntity(),
-            String.class);
-
-    return responseEntity.getBody();
+    return mySpotifyUtils.buildResponseEntity(builder);
   }
 }
