@@ -82,12 +82,55 @@ public class SpotifyReaderImpl implements SpotifyReader {
     return responseEntity.getBody();
   }
 
-  public String readTracksStatistics() {
+  /*  TRACKS    */
+  public String readDefaultTracksStatistics() {
     RestTemplate restTemplate = new RestTemplate();
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(APIAddressHandler.GET_TRACKS_URI).queryParam("limit", "10")
         .queryParam("time_range", "long_term");
+
+    ResponseEntity<String> responseEntity = restTemplate
+        .exchange(builder.toUriString(), HttpMethod.GET, getBearerHttpEntity(), String.class);
+
+    return responseEntity.getBody();
+  }
+
+
+  @Override
+  public String readTracksStatistics(int tracksNumber) {
+    RestTemplate restTemplate = new RestTemplate();
+
+    UriComponentsBuilder builder = UriComponentsBuilder
+        .fromUriString(APIAddressHandler.GET_TRACKS_URI).queryParam("limit", tracksNumber);
+
+    ResponseEntity<String> responseEntity = restTemplate
+        .exchange(builder.toUriString(), HttpMethod.GET, getBearerHttpEntity(), String.class);
+
+    return responseEntity.getBody();
+  }
+
+  @Override
+  public String readTracksStatistics(int tracksNumber, String timeRange) {
+    RestTemplate restTemplate = new RestTemplate();
+
+    UriComponentsBuilder builder = UriComponentsBuilder
+        .fromUriString(APIAddressHandler.GET_TRACKS_URI).queryParam("limit", tracksNumber)
+        .queryParam("time_range", mapTermRequest(timeRange));
+
+    ResponseEntity<String> responseEntity = restTemplate
+        .exchange(builder.toUriString(), HttpMethod.GET, getBearerHttpEntity(), String.class);
+
+    return responseEntity.getBody();
+  }
+
+  @Override
+  public String readTracksStatistics(String timeRange) {
+    RestTemplate restTemplate = new RestTemplate();
+
+    UriComponentsBuilder builder = UriComponentsBuilder
+        .fromUriString(APIAddressHandler.GET_TRACKS_URI)
+        .queryParam("time_range", mapTermRequest(timeRange));
 
     ResponseEntity<String> responseEntity = restTemplate
         .exchange(builder.toUriString(), HttpMethod.GET, getBearerHttpEntity(), String.class);

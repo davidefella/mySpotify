@@ -8,10 +8,16 @@ public interface SpotifyReader {
 
   String readArtistsStatistics(int artistsNumber);
 
-  String readArtistsStatistics(int artistsNumber, String term);
+  String readArtistsStatistics(int artistsNumber, String timeRange);
 
   String readArtistsStatistics(String timeRange);
 
-  String readTracksStatistics();
+  String readDefaultTracksStatistics();
+
+  String readTracksStatistics(int tracksNumber);
+
+  String readTracksStatistics(int tracksNumber, String timeRange);
+
+  String readTracksStatistics(String timeRange);
 
 }

@@ -16,4 +16,10 @@ public interface StatisticsReader {
 
   List<String> getTracksStatistics();
 
+  List<String> getTracksStatistics(@RequestParam int artistsNumber);
+
+  List<String> getTracksStatistics(@RequestParam String timeRange);
+
+  List<String> getTracksStatistics(@RequestParam int artistsNumber, @RequestParam String timeRange);
+
 }

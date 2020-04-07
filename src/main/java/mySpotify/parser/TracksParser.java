@@ -15,10 +15,32 @@ public class TracksParser {
   @Autowired
   TracksMapper tracksMapper;
 
-  public List<String> getTracksFromSpotify() {
+  public List<String> getDefaultTracksFromSpotify() {
 
-    String tracks = spotifyReader.readTracksStatistics();
+    String tracksResponse = spotifyReader.readDefaultTracksStatistics();
 
-    return tracksMapper.mapTracksFromResponse(tracks);
+    return tracksMapper.mapTracksFromResponse(tracksResponse);
   }
+
+  public List<String> getTracksFromSpotify(int artistsNumber) {
+
+    String tracksResponse = spotifyReader.readTracksStatistics(artistsNumber);
+
+    return tracksMapper.mapTracksFromResponse(tracksResponse);
+  }
+
+  public List<String> getTracksFromSpotify(String timeRange) {
+
+    String tracksResponse = spotifyReader.readTracksStatistics(timeRange);
+
+    return tracksMapper.mapTracksFromResponse(tracksResponse);
+  }
+
+  public List<String> getTracksFromSpotify(int tracksNumber, String timeRange) {
+
+    String tracksResponse = spotifyReader.readTracksStatistics(tracksNumber, timeRange);
+
+    return tracksMapper.mapTracksFromResponse(tracksResponse);
+  }
+
 }

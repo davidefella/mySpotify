@@ -5,7 +5,6 @@ import mySpotify.controller.api.StatisticsReader;
 import mySpotify.parser.ArtistsParser;
 import mySpotify.parser.TracksParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,10 +43,29 @@ public class StatisticsReaderImpl implements StatisticsReader {
     return artistsParser.getArtistsFromSpotify(artistsNumber, timeRange);
   }
 
-  @GetMapping("/getTracksStats")
+  @RequestMapping(value = "v1/tracks")
   public List<String> getTracksStatistics() {
-    List<String> res = tracksParser.getTracksFromSpotify();
+    List<String> res = tracksParser.getDefaultTracksFromSpotify();
 
     return res;
+  }
+
+  @RequestMapping(value = "v1/tracks", params = "tracksNumber")
+  public List<String> getTracksStatistics(@RequestParam int tracksNumber) {
+
+    return tracksParser.getTracksFromSpotify(tracksNumber);
+  }
+
+  @RequestMapping(value = "v1/tracks", params = "timeRange")
+  public List<String> getTracksStatistics(@RequestParam String timeRange) {
+
+    return tracksParser.getTracksFromSpotify(timeRange);
+  }
+
+  @RequestMapping(value = "v1/tracks", params = {"tracksNumber", "timeRange"})
+  public List<String> getTracksStatistics(@RequestParam int tracksNumber,
+      @RequestParam String timeRange) {
+
+    return tracksParser.getTracksFromSpotify(tracksNumber, timeRange);
   }
 }
