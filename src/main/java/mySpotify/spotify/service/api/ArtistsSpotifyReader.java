@@ -2,7 +2,7 @@ package mySpotify.spotify.service.api;
 
 import org.springframework.web.bind.annotation.PathVariable;
 
-public interface SpotifyReader {
+public interface ArtistsSpotifyReader {
 
   String readDefaultArtistsStatistics();
 
@@ -11,13 +11,5 @@ public interface SpotifyReader {
   String readArtistsStatistics(int artistsNumber, String timeRange);
 
   String readArtistsStatistics(String timeRange);
-
-  String readDefaultTracksStatistics();
-
-  String readTracksStatistics(int tracksNumber);
-
-  String readTracksStatistics(int tracksNumber, String timeRange);
-
-  String readTracksStatistics(String timeRange);
 
 }

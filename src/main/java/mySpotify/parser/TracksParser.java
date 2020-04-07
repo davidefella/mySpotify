@@ -2,7 +2,7 @@ package mySpotify.parser;
 
 import java.util.List;
 import mySpotify.mapper.TracksMapper;
-import mySpotify.spotify.service.api.SpotifyReader;
+import mySpotify.spotify.service.api.TracksSpotifyReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,35 +10,35 @@ import org.springframework.stereotype.Service;
 public class TracksParser {
 
   @Autowired
-  SpotifyReader spotifyReader;
+  TracksSpotifyReader tracksSpotifyReader;
 
   @Autowired
   TracksMapper tracksMapper;
 
   public List<String> getDefaultTracksFromSpotify() {
 
-    String tracksResponse = spotifyReader.readDefaultTracksStatistics();
+    String tracksResponse = tracksSpotifyReader.readDefaultTracksStatistics();
 
     return tracksMapper.mapTracksFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(int artistsNumber) {
 
-    String tracksResponse = spotifyReader.readTracksStatistics(artistsNumber);
+    String tracksResponse = tracksSpotifyReader.readTracksStatistics(artistsNumber);
 
     return tracksMapper.mapTracksFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(String timeRange) {
 
-    String tracksResponse = spotifyReader.readTracksStatistics(timeRange);
+    String tracksResponse = tracksSpotifyReader.readTracksStatistics(timeRange);
 
     return tracksMapper.mapTracksFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(int tracksNumber, String timeRange) {
 
-    String tracksResponse = spotifyReader.readTracksStatistics(tracksNumber, timeRange);
+    String tracksResponse = tracksSpotifyReader.readTracksStatistics(tracksNumber, timeRange);
 
     return tracksMapper.mapTracksFromResponse(tracksResponse);
   }
