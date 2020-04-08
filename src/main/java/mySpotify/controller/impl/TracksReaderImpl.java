@@ -20,9 +20,8 @@ public class TracksReaderImpl implements TracksReader {
 
   @RequestMapping(value = "v1/tracks")
   public List<String> getTracksStatistics() {
-    List<String> res = tracksParser.getDefaultTracksFromSpotify();
+    return tracksParser.getDefaultTracksFromSpotify();
 
-    return res;
   }
 
   @RequestMapping(value = "v1/tracks", params = "tracksNumber")
