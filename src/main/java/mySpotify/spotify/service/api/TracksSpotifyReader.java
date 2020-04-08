@@ -2,12 +2,12 @@ package mySpotify.spotify.service.api;
 
 public interface TracksSpotifyReader {
 
-  String readDefaultTracksStatistics();
+  String getDefaultTracksFromSpotify();
 
-  String readTracksStatistics(int tracksNumber);
+  String getTracksFromSpotify(int tracksNumber);
 
-  String readTracksStatistics(int tracksNumber, String timeRange);
+  String getTracksFromSpotify(int tracksNumber, String timeRange);
 
-  String readTracksStatistics(String timeRange);
+  String getTracksFromSpotify(String timeRange);
 
 }

@@ -15,7 +15,7 @@ public class TracksSpotifyReaderImpl implements TracksSpotifyReader {
   @Autowired
   MySpotifyUtils mySpotifyUtils;
 
-  public String readDefaultTracksStatistics() {
+  public String getDefaultTracksFromSpotify() {
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readTracksEndpoints());
@@ -24,7 +24,7 @@ public class TracksSpotifyReaderImpl implements TracksSpotifyReader {
   }
 
   @Override
-  public String readTracksStatistics(int tracksNumber) {
+  public String getTracksFromSpotify(int tracksNumber) {
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readTracksEndpoints()).queryParam("limit", tracksNumber);
@@ -33,7 +33,7 @@ public class TracksSpotifyReaderImpl implements TracksSpotifyReader {
   }
 
   @Override
-  public String readTracksStatistics(String timeRange) {
+  public String getTracksFromSpotify(String timeRange) {
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readTracksEndpoints())
@@ -43,7 +43,7 @@ public class TracksSpotifyReaderImpl implements TracksSpotifyReader {
   }
 
   @Override
-  public String readTracksStatistics(int tracksNumber, String timeRange) {
+  public String getTracksFromSpotify(int tracksNumber, String timeRange) {
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readTracksEndpoints()).queryParam("limit", tracksNumber)

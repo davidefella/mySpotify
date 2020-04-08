@@ -19,7 +19,7 @@ public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
   @Autowired
   MySpotifyUtils mySpotifyUtils;
 
-  public String readDefaultArtistsStatistics() {
+  public String getDefaultArtistsFromSpotify() {
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readArtistsEndpoints());
@@ -27,7 +27,7 @@ public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
     return mySpotifyUtils.buildResponseEntity(builder);
   }
 
-  public String readArtistsStatistics(int artistsNumber) {
+  public String getArtistsFromSpotify(int artistsNumber) {
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readArtistsEndpoints()).queryParam("limit", artistsNumber);
@@ -35,7 +35,7 @@ public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
     return mySpotifyUtils.buildResponseEntity(builder);
   }
 
-  public String readArtistsStatistics(int artistsNumber, String timeRange) {
+  public String getArtistsFromSpotify(int artistsNumber, String timeRange) {
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readArtistsEndpoints()).queryParam("limit", artistsNumber)
@@ -44,7 +44,7 @@ public class ArtistsSpotifyReaderImpl implements ArtistsSpotifyReader {
     return mySpotifyUtils.buildResponseEntity(builder);
   }
 
-  public String readArtistsStatistics(String timeRange) {
+  public String getArtistsFromSpotify(String timeRange) {
 
     UriComponentsBuilder builder = UriComponentsBuilder
         .fromUriString(mySpotifyUtils.readArtistsEndpoints())

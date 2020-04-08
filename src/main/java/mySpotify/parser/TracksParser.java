@@ -17,28 +17,28 @@ public class TracksParser {
 
   public List<String> getDefaultTracksFromSpotify() {
 
-    String tracksResponse = tracksSpotifyReader.readDefaultTracksStatistics();
+    String tracksResponse = tracksSpotifyReader.getDefaultTracksFromSpotify();
 
     return tracksMapper.mapTracksFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(int artistsNumber) {
 
-    String tracksResponse = tracksSpotifyReader.readTracksStatistics(artistsNumber);
+    String tracksResponse = tracksSpotifyReader.getTracksFromSpotify(artistsNumber);
 
     return tracksMapper.mapTracksFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(String timeRange) {
 
-    String tracksResponse = tracksSpotifyReader.readTracksStatistics(timeRange);
+    String tracksResponse = tracksSpotifyReader.getTracksFromSpotify(timeRange);
 
     return tracksMapper.mapTracksFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(int tracksNumber, String timeRange) {
 
-    String tracksResponse = tracksSpotifyReader.readTracksStatistics(tracksNumber, timeRange);
+    String tracksResponse = tracksSpotifyReader.getTracksFromSpotify(tracksNumber, timeRange);
 
     return tracksMapper.mapTracksFromResponse(tracksResponse);
   }

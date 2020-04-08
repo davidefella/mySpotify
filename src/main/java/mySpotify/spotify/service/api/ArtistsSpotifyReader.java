@@ -4,12 +4,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 public interface ArtistsSpotifyReader {
 
-  String readDefaultArtistsStatistics();
+  String getDefaultArtistsFromSpotify();
 
-  String readArtistsStatistics(int artistsNumber);
+  String getArtistsFromSpotify(int artistsNumber);
 
-  String readArtistsStatistics(int artistsNumber, String timeRange);
+  String getArtistsFromSpotify(int artistsNumber, String timeRange);
 
-  String readArtistsStatistics(String timeRange);
+  String getArtistsFromSpotify(String timeRange);
 
 }

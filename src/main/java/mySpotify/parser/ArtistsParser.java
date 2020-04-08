@@ -17,28 +17,28 @@ public class ArtistsParser {
 
   public List<String> getDefaultArtistsFromSpotify() {
 
-    String artists = artistsSpotifyReader.readDefaultArtistsStatistics();
+    String artists = artistsSpotifyReader.getDefaultArtistsFromSpotify();
 
     return artistsMapper.mapArtistFromResponse(artists);
   }
 
   public List<String> getArtistsFromSpotify(int artistsNumber) {
 
-    String artists = artistsSpotifyReader.readArtistsStatistics(artistsNumber);
+    String artists = artistsSpotifyReader.getArtistsFromSpotify(artistsNumber);
 
     return artistsMapper.mapArtistFromResponse(artists);
   }
 
   public List<String> getArtistsFromSpotify(String timeRange) {
 
-    String artists = artistsSpotifyReader.readArtistsStatistics(timeRange);
+    String artists = artistsSpotifyReader.getArtistsFromSpotify(timeRange);
 
     return artistsMapper.mapArtistFromResponse(artists);
   }
 
   public List<String> getArtistsFromSpotify(int artistsNumber, String term) {
 
-    String artists = artistsSpotifyReader.readArtistsStatistics(artistsNumber, term);
+    String artists = artistsSpotifyReader.getArtistsFromSpotify(artistsNumber, term);
 
     return artistsMapper.mapArtistFromResponse(artists);
   }
