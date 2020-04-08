@@ -44,7 +44,7 @@ public class ArtistsReaderTest {
   }
 
   @Test
-  public void Artists_TimeRangeShort_Returns20() {
+  public void Artists_Short_Returns20() {
     List<String> artists;
 
     artists = artistsParser.getArtistsFromSpotify(Consts.SHORT_INPUT);
@@ -53,7 +53,7 @@ public class ArtistsReaderTest {
   }
 
   @Test
-  public void Artists_TimeRangeMedium_Returns20() {
+  public void Artists_Medium_Returns20() {
     List<String> artists;
 
     artists = artistsParser.getArtistsFromSpotify(Consts.MEDIUM_INPUT);
@@ -62,11 +62,78 @@ public class ArtistsReaderTest {
   }
 
   @Test
-  public void Artists_TimeRangeLarge_Returns20() {
+  public void Artists_Long_Returns20() {
     List<String> artists;
 
     artists = artistsParser.getArtistsFromSpotify(Consts.LONG_INPUT);
 
     Assert.assertEquals(artists.size(), 20);
   }
+
+  @Test
+  public void Artists_DefaultCompareMedium_TheSame() {
+    List<String> artistsDefault;
+    List<String> artistsMediumRangeTime;
+
+    artistsDefault = artistsParser.getDefaultArtistsFromSpotify();
+    artistsMediumRangeTime = artistsParser.getArtistsFromSpotify(Consts.MEDIUM_INPUT);
+
+    Assert.assertTrue(artistsDefault.equals(artistsMediumRangeTime));
+  }
+
+  @Test
+  public void Artists_DefaultCompare20AndMedium_TheSame() {
+    List<String> artistsDefault;
+    List<String> artistsMediumRangeTime;
+
+    artistsDefault = artistsParser.getDefaultArtistsFromSpotify();
+    artistsMediumRangeTime = artistsParser.getArtistsFromSpotify(20, Consts.MEDIUM_INPUT);
+
+    Assert.assertTrue(artistsDefault.equals(artistsMediumRangeTime));
+  }
+
+  @Test
+  public void Artists_DefaultCompareShort_NotTheSame() {
+    List<String> artistsDefault;
+    List<String> artistsShortRangeTime;
+
+    artistsDefault = artistsParser.getDefaultArtistsFromSpotify();
+    artistsShortRangeTime = artistsParser.getArtistsFromSpotify(Consts.SHORT_INPUT);
+
+    Assert.assertFalse(artistsDefault.equals(artistsShortRangeTime));
+  }
+
+  @Test
+  public void Artists_DefaultCompareLong_NotTheSame() {
+    List<String> artistsDefault;
+    List<String> artistsLongRangeTime;
+
+    artistsDefault = artistsParser.getDefaultArtistsFromSpotify();
+    artistsLongRangeTime = artistsParser.getArtistsFromSpotify(Consts.LONG_INPUT);
+
+    Assert.assertFalse(artistsDefault.equals(artistsLongRangeTime));
+  }
+
+  @Test
+  public void Artists_DefaultCompare20AndShort_NotTheSame() {
+    List<String> artistsDefault;
+    List<String> artistsShortRangeTime;
+
+    artistsDefault = artistsParser.getDefaultArtistsFromSpotify();
+    artistsShortRangeTime = artistsParser.getArtistsFromSpotify(20, Consts.SHORT_INPUT);
+
+    Assert.assertFalse(artistsDefault.equals(artistsShortRangeTime));
+  }
+
+  @Test
+  public void Artists_DefaultCompare20AndLong_NotTheSame() {
+    List<String> artistsDefault;
+    List<String> artistsLongRangeTime;
+
+    artistsDefault = artistsParser.getDefaultArtistsFromSpotify();
+    artistsLongRangeTime = artistsParser.getArtistsFromSpotify(20, Consts.LONG_INPUT);
+
+    Assert.assertFalse(artistsDefault.equals(artistsLongRangeTime));
+  }
+
 }
