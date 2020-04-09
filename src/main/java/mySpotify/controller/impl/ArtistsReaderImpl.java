@@ -19,25 +19,25 @@ public class ArtistsReaderImpl implements ArtistsReader {
   TracksParser tracksParser;
 
   @RequestMapping(value = "v1/artists")
-  public List<String> getArtistsStatistics() {
+  public List<String> getDefaultArtists() {
 
     return artistsParser.getDefaultArtistsFromSpotify();
   }
 
   @RequestMapping(value = "v1/artists", params = "timeRange")
-  public List<String> getArtistsStatistics(@RequestParam String timeRange) {
+  public List<String> getArtists(@RequestParam String timeRange) {
 
     return artistsParser.getArtistsFromSpotify(timeRange);
   }
 
   @RequestMapping(value = "v1/artists", params = "artistsNumber")
-  public List<String> getArtistsStatistics(@RequestParam int artistsNumber) {
+  public List<String> getArtists(@RequestParam int artistsNumber) {
 
     return artistsParser.getArtistsFromSpotify(artistsNumber);
   }
 
   @RequestMapping(value = "v1/artists", params = {"artistsNumber", "timeRange"})
-  public List<String> getArtistsStatistics(@RequestParam int artistsNumber,
+  public List<String> getArtists(@RequestParam int artistsNumber,
       @RequestParam String timeRange) {
 
     return artistsParser.getArtistsFromSpotify(artistsNumber, timeRange);

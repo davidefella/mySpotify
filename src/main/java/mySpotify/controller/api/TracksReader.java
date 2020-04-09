@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface TracksReader {
 
-  List<String> getTracksStatistics();
+  List<String> getDefaultTracks();
 
-  List<String> getTracksStatistics(@RequestParam int artistsNumber);
+  List<String> getTracks(@RequestParam int artistsNumber);
 
-  List<String> getTracksStatistics(@RequestParam String timeRange);
+  List<String> getTracks(@RequestParam String timeRange);
 
-  List<String> getTracksStatistics(@RequestParam int artistsNumber, @RequestParam String timeRange);
+  List<String> getTracks(@RequestParam int artistsNumber, @RequestParam String timeRange);
 
 }
