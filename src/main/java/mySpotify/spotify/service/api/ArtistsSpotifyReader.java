@@ -1,7 +1,5 @@
 package mySpotify.spotify.service.api;
 
-import org.springframework.web.bind.annotation.PathVariable;
-
 public interface ArtistsSpotifyReader {
 
   String getDefaultArtistsFromSpotify();

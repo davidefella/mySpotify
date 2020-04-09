@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArtistsMapper {
 
-  public List<String> mapArtistFromResponse(String artists) {
+  public List<String> mapArtistToStringFromResponse(String artists) {
     Root root;
     ObjectMapper mapper = new ObjectMapper();
     List<String> artistsList = new ArrayList<>();
@@ -31,4 +31,22 @@ public class ArtistsMapper {
 
     return artistsList;
   }
+
+  public List<Items> mapArtistFromResponse(String artists) {
+    Root root;
+    ObjectMapper mapper = new ObjectMapper();
+    List<Items> artistsItems = new ArrayList<>();
+
+    try {
+
+      root = mapper.readValue(artists, Root.class);
+      artistsItems = root.getItems();
+
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
+
+    return artistsItems;
+  }
+
 }

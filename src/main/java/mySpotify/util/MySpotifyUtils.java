@@ -83,6 +83,12 @@ public class MySpotifyUtils {
     return jsonObject.get(Consts.TOKEN_ENDPOINTS).toString();
   }
 
+  public String readAlbumEndpoints() {
+    JSONObject jsonObject = parseJsonFile(spotifyServices);
+
+    return jsonObject.get(Consts.ALBUM_ENDPOINTS).toString();
+  }
+
   private JSONObject parseJsonFile(String path) {
     JSONParser parser = new JSONParser();
     Object objParsed = null;

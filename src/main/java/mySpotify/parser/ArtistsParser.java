@@ -2,6 +2,7 @@ package mySpotify.parser;
 
 import java.util.List;
 import mySpotify.mapper.ArtistsMapper;
+import mySpotify.model.Artists.Items;
 import mySpotify.spotify.service.api.ArtistsSpotifyReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,13 @@ public class ArtistsParser {
 
     String artists = artistsSpotifyReader.getDefaultArtistsFromSpotify();
 
+    return artistsMapper.mapArtistToStringFromResponse(artists);
+  }
+
+  public List<Items> getItemsDefaultArtistsFromSpotify() {
+
+    String artists = artistsSpotifyReader.getDefaultArtistsFromSpotify();
+
     return artistsMapper.mapArtistFromResponse(artists);
   }
 
@@ -26,20 +34,20 @@ public class ArtistsParser {
 
     String artists = artistsSpotifyReader.getArtistsFromSpotify(artistsNumber);
 
-    return artistsMapper.mapArtistFromResponse(artists);
+    return artistsMapper.mapArtistToStringFromResponse(artists);
   }
 
   public List<String> getArtistsFromSpotify(String timeRange) {
 
     String artists = artistsSpotifyReader.getArtistsFromSpotify(timeRange);
 
-    return artistsMapper.mapArtistFromResponse(artists);
+    return artistsMapper.mapArtistToStringFromResponse(artists);
   }
 
   public List<String> getArtistsFromSpotify(int artistsNumber, String term) {
 
     String artists = artistsSpotifyReader.getArtistsFromSpotify(artistsNumber, term);
 
-    return artistsMapper.mapArtistFromResponse(artists);
+    return artistsMapper.mapArtistToStringFromResponse(artists);
   }
 }

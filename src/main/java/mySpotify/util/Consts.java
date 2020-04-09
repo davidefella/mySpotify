@@ -12,5 +12,6 @@ public final class Consts {
   public static final String TRACKS_ENDPOINTS = "tracks";
   public static final String ARTISTS_ENDPOINTS = "artists";
   public static final String TOKEN_ENDPOINTS = "token";
+  public static final String ALBUM_ENDPOINTS = "album"; 
 
 }

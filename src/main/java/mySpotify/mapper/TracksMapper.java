@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TracksMapper {
 
-  public List<String> mapTracksFromResponse(String tracks) {
+  public List<String> mapTracksToStringFromResponse(String tracks) {
     Root root;
     ObjectMapper mapper = new ObjectMapper();
     List<String> tracksList = new ArrayList<>();

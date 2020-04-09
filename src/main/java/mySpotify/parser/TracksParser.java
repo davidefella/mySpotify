@@ -2,6 +2,7 @@ package mySpotify.parser;
 
 import java.util.List;
 import mySpotify.mapper.TracksMapper;
+import mySpotify.model.Tracks.Items;
 import mySpotify.spotify.service.api.TracksSpotifyReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,28 +20,27 @@ public class TracksParser {
 
     String tracksResponse = tracksSpotifyReader.getDefaultTracksFromSpotify();
 
-    return tracksMapper.mapTracksFromResponse(tracksResponse);
+    return tracksMapper.mapTracksToStringFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(int artistsNumber) {
 
     String tracksResponse = tracksSpotifyReader.getTracksFromSpotify(artistsNumber);
 
-    return tracksMapper.mapTracksFromResponse(tracksResponse);
+    return tracksMapper.mapTracksToStringFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(String timeRange) {
 
     String tracksResponse = tracksSpotifyReader.getTracksFromSpotify(timeRange);
 
-    return tracksMapper.mapTracksFromResponse(tracksResponse);
+    return tracksMapper.mapTracksToStringFromResponse(tracksResponse);
   }
 
   public List<String> getTracksFromSpotify(int tracksNumber, String timeRange) {
 
     String tracksResponse = tracksSpotifyReader.getTracksFromSpotify(tracksNumber, timeRange);
 
-    return tracksMapper.mapTracksFromResponse(tracksResponse);
+    return tracksMapper.mapTracksToStringFromResponse(tracksResponse);
   }
-
 }
