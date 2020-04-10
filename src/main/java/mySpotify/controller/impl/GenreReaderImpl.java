@@ -15,6 +15,21 @@ public class GenreReaderImpl implements GenreReader {
 
   @RequestMapping(value = "v1/genres")
   public Map<String, Integer> getGenres() {
-    return genreParse.getGenresFromSpotify();
+    return genreParse.getGenresFromDefault();
+  }
+
+  @RequestMapping(value = "v1/genres", params = "timeRange")
+  public Map<String, Integer> getGenre(String timeRange) {
+    return genreParse.getGenresFromSpotify(timeRange);
+  }
+
+  @RequestMapping(value = "v1/genres", params = "artistsNumber")
+  public Map<String, Integer> getGenre(int artistsNumber) {
+    return genreParse.getGenresFromSpotify(artistsNumber);
+  }
+
+  @RequestMapping(value = "v1/genres",params = {"artistsNumber", "timeRange"})
+  public Map<String, Integer> getGenre(int artistsNumber, String timeRange) {
+    return genreParse.getGenresFromSpotify(artistsNumber, timeRange);
   }
 }

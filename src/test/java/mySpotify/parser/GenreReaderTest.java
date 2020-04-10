@@ -22,7 +22,7 @@ public class GenreReaderTest {
     Map<String, Integer> genresFromSpotify;
     Set<String> keySetGenreString;
 
-    genresFromSpotify = genreParser.getGenresFromSpotify();
+    genresFromSpotify = genreParser.getGenresFromDefault();
     keySetGenreString = genresFromSpotify.keySet();
 
     Assert.assertNotNull(keySetGenreString);

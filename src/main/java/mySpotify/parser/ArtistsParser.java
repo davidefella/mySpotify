@@ -23,13 +23,6 @@ public class ArtistsParser {
     return artistsMapper.mapArtistToStringFromResponse(artists);
   }
 
-  public List<Items> getItemsDefaultArtistsFromSpotify() {
-
-    String artists = artistsSpotifyReader.getDefaultArtistsFromSpotify();
-
-    return artistsMapper.mapArtistFromResponse(artists);
-  }
-
   public List<String> getArtistsFromSpotify(int artistsNumber) {
 
     String artists = artistsSpotifyReader.getArtistsFromSpotify(artistsNumber);
@@ -49,5 +42,33 @@ public class ArtistsParser {
     String artists = artistsSpotifyReader.getArtistsFromSpotify(artistsNumber, term);
 
     return artistsMapper.mapArtistToStringFromResponse(artists);
+  }
+
+  public List<Items> getItemsDefaultArtistsFromSpotify() {
+
+    String artists = artistsSpotifyReader.getDefaultArtistsFromSpotify();
+
+    return artistsMapper.mapArtistFromResponse(artists);
+  }
+
+  public List<Items> getItemsArtistsFromSpotify(int artistsNumber) {
+
+    String artists = artistsSpotifyReader.getArtistsFromSpotify(artistsNumber);
+
+    return artistsMapper.mapArtistFromResponse(artists);
+  }
+
+  public List<Items> getItemsArtistsFromSpotify(String timeRange) {
+
+    String artists = artistsSpotifyReader.getArtistsFromSpotify(timeRange);
+
+    return artistsMapper.mapArtistFromResponse(artists);
+  }
+
+  public List<Items> getItemsArtistsFromSpotify(int artistsNumber, String term) {
+
+    String artists = artistsSpotifyReader.getArtistsFromSpotify(artistsNumber, term);
+
+    return artistsMapper.mapArtistFromResponse(artists);
   }
 }
