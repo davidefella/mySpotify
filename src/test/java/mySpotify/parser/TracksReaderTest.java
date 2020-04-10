@@ -17,7 +17,7 @@ public class TracksReaderTest {
   TracksParser tracksParser;
 
   @Test
-  public void Tracks_Default_Returns20() {
+  public void Tracks_Default_ReturnsTwenty() {
     List<String> tracks;
 
     tracks = tracksParser.getDefaultTracksFromSpotify();
@@ -26,7 +26,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Tracks_NumberParam_Returns0() {
+  public void Tracks_EqualZero_ReturnsZero() {
     List<String> tracks;
 
     tracks = tracksParser.getTracksFromSpotify(0);
@@ -35,7 +35,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Tracks_NumberParam_Returns50() {
+  public void Tracks_EqualFifty_ReturnsFifty() {
     List<String> tracks;
 
     tracks = tracksParser.getTracksFromSpotify(50);
@@ -44,7 +44,16 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Tracks_Short_Returns20() {
+  public void Tracks_OverSpotifyLimit_ReturnsFifty() {
+    List<String> tracks;
+
+    tracks = tracksParser.getTracksFromSpotify(51);
+
+    Assert.assertEquals(tracks.size(), 50);
+  }
+
+  @Test
+  public void Tracks_TimeRangeShort_ReturnsTwenty() {
     List<String> tracks;
 
     tracks = tracksParser.getTracksFromSpotify(Consts.SHORT_INPUT);
@@ -53,7 +62,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Tracks_Medium_Returns20() {
+  public void Tracks_TimeRangeMedium_ReturnsTwenty() {
     List<String> tracks;
 
     tracks = tracksParser.getTracksFromSpotify(Consts.MEDIUM_INPUT);
@@ -62,7 +71,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Tracks_Large_Returns20() {
+  public void Tracks_TimeRangeLarge_ReturnsTwenty() {
     List<String> tracks;
 
     tracks = tracksParser.getTracksFromSpotify(Consts.LONG_INPUT);
@@ -71,7 +80,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Tracks_DefaultCompareMedium_TheSame() {
+  public void Tracks_DefaultCompareTimeRangeMedium_TheSame() {
     List<String> tracksDefault;
     List<String> tracksMediumRangeTime;
 
@@ -82,7 +91,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Artists_DefaultCompare20AndMedium_TheSame() {
+  public void Tracks_DefaultCompareEqualTwentyAndTimeRangeMedium_TheSame() {
     List<String> tracksDefault;
     List<String> tracksMediumRangeTime;
 
@@ -93,7 +102,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Artists_DefaultCompareShort_NotTheSame() {
+  public void Tracks_DefaultCompareTimeRangeShort_NotTheSame() {
     List<String> tracksDefault;
     List<String> tracksShortRangeTime;
 
@@ -104,7 +113,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Artists_DefaultCompareLong_NotTheSame() {
+  public void Tracks_DefaultCompareTimeRangeLong_NotTheSame() {
     List<String> tracksDefault;
     List<String> tracksLongRangeTime;
 
@@ -115,7 +124,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Artists_DefaultCompare20AndShort_NotTheSame() {
+  public void Tracks_DefaultCompareEqualTwentyAndTimeRangeShort_NotTheSame() {
     List<String> tracksDefault;
     List<String> tracksShortRangeTime;
 
@@ -126,7 +135,7 @@ public class TracksReaderTest {
   }
 
   @Test
-  public void Artists_DefaultCompare20AndLong_NotTheSame() {
+  public void Tracks_DefaultCompareTwentyAndTimeRangeLong_NotTheSame() {
     List<String> tracksDefault;
     List<String> tracksLongRangeTime;
 
