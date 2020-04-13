@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,8 +20,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class MySpotifyUtils {
 
-  private final String tokensFilePath = "./src/main/resources/token/tokens.json";
   private final String spotifyServices = "./src/main/resources/endpoints/spotifyServices.json";
+
+  @Value("${refresh_token}")
+  private String refreshToken;
 
   @Autowired
   TokenGenerator tokenGenerator;
@@ -60,9 +63,7 @@ public class MySpotifyUtils {
 
   public String readRefreshToken() {
 
-    JSONObject jsonObject = parseJsonFile(tokensFilePath);
-
-    return jsonObject.get(Consts.REFRESH_TOKEN).toString();
+    return refreshToken;
   }
 
   public String readTracksEndpoints() {
