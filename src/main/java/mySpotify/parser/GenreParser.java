@@ -14,33 +14,33 @@ public class GenreParser {
   @Autowired
   GenreMapper genreMapper;
 
-  public Map<String, Integer> getGenresFromDefault() {
+  public Map<String, String> getGenresFromDefault() {
 
-    Map<String, Integer> stringIntegerMap = genreMapper
+    Map<String, String> stringIntegerMap = genreMapper
         .countGenreFromArtists(artistsParser.getItemsDefaultArtistsFromSpotify());
 
     return stringIntegerMap;
   }
 
-  public Map<String, Integer> getGenresFromSpotify(int artistsNumber) {
+  public Map<String, String> getGenresFromSpotify(int artistsNumber) {
 
-    Map<String, Integer> stringIntegerMap = genreMapper
+    Map<String, String> stringIntegerMap = genreMapper
         .countGenreFromArtists(artistsParser.getItemsArtistsFromSpotify(artistsNumber));
 
     return stringIntegerMap;
   }
 
-  public Map<String, Integer> getGenresFromSpotify(int artistsNumber, String timeRange) {
+  public Map<String, String> getGenresFromSpotify(int artistsNumber, String timeRange) {
 
-    Map<String, Integer> stringIntegerMap = genreMapper
+    Map<String, String> stringIntegerMap = genreMapper
         .countGenreFromArtists(artistsParser.getItemsArtistsFromSpotify(artistsNumber, timeRange));
 
     return stringIntegerMap;
   }
 
-  public Map<String, Integer> getGenresFromSpotify(String timeRange) {
+  public Map<String, String> getGenresFromSpotify(String timeRange) {
 
-    Map<String, Integer> stringIntegerMap = genreMapper
+    Map<String, String> stringIntegerMap = genreMapper
         .countGenreFromArtists(artistsParser.getItemsArtistsFromSpotify(timeRange));
 
     return stringIntegerMap;

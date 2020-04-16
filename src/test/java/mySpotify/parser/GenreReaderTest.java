@@ -20,7 +20,7 @@ public class GenreReaderTest {
   @Test
   public void Genre_Default_isNotNull() {
 
-    Map<String, Integer> defaultGenreToCount;
+    Map<String, String> defaultGenreToCount;
     Set<String> keySetGenreString;
 
     defaultGenreToCount = genreParser.getGenresFromDefault();
@@ -32,7 +32,7 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_NumberParamZero_Returns0() {
-    Map<String, Integer> genreToCount;
+    Map<String, String> genreToCount;
 
     genreToCount = genreParser.getGenresFromSpotify(0);
 
@@ -41,7 +41,7 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_EqualFifty_KeySetNotNull() {
-    Map<String, Integer> genreToCount;
+    Map<String, String> genreToCount;
 
     genreToCount = genreParser.getGenresFromSpotify(50);
 
@@ -50,7 +50,7 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_OverSpotifyLimit_KeySetNotNull() {
-    Map<String, Integer> genreToCount;
+    Map<String, String> genreToCount;
 
     genreToCount = genreParser.getGenresFromSpotify(51);
 
@@ -59,7 +59,7 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_TimeRangeShort_KeySetNotNull() {
-    Map<String, Integer> genreToCount;
+    Map<String, String> genreToCount;
 
     genreToCount = genreParser.getGenresFromSpotify(Consts.SHORT_INPUT);
 
@@ -69,7 +69,7 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_TimeRangeMedium_KeySetNotNull() {
-    Map<String, Integer> genreToCount;
+    Map<String, String> genreToCount;
 
     genreToCount = genreParser.getGenresFromSpotify(Consts.MEDIUM_INPUT);
 
@@ -78,7 +78,7 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_TimeRangeLong_KeySetNotNull() {
-    Map<String, Integer> genreToCount;
+    Map<String, String> genreToCount;
 
     genreToCount = genreParser.getGenresFromSpotify(Consts.LONG_INPUT);
 
@@ -87,8 +87,8 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_DefaultCompareMedium_KeySetIsTheSame() {
-    Map<String, Integer> defaultGenreToCount;
-    Map<String, Integer> genreToCountMediumRange;
+    Map<String, String> defaultGenreToCount;
+    Map<String, String> genreToCountMediumRange;
 
     defaultGenreToCount = genreParser.getGenresFromDefault();
     genreToCountMediumRange = genreParser.getGenresFromSpotify(Consts.MEDIUM_INPUT);
@@ -100,8 +100,8 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_DefaultCompareTwentyAndTimeRangeMedium_TheSame() {
-    Map<String, Integer> defaultGenreToCount;
-    Map<String, Integer> genreToCountMediumRange;
+    Map<String, String> defaultGenreToCount;
+    Map<String, String> genreToCountMediumRange;
 
     defaultGenreToCount = genreParser.getGenresFromDefault();
     genreToCountMediumRange = genreParser.getGenresFromSpotify(20, Consts.MEDIUM_INPUT);
@@ -113,8 +113,8 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_DefaultCompareRangeShort_NotTheSame() {
-    Map<String, Integer> defaultGenreToCount;
-    Map<String, Integer> genreToCountShortRange;
+    Map<String, String> defaultGenreToCount;
+    Map<String, String> genreToCountShortRange;
 
     defaultGenreToCount = genreParser.getGenresFromDefault();
     genreToCountShortRange = genreParser.getGenresFromSpotify(20, Consts.SHORT_INPUT);
@@ -125,8 +125,8 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_DefaultCompareRangeLong_NotTheSame() {
-    Map<String, Integer> defaultGenreToCount;
-    Map<String, Integer> genreToCountLongRange;
+    Map<String, String> defaultGenreToCount;
+    Map<String, String> genreToCountLongRange;
 
     defaultGenreToCount = genreParser.getGenresFromDefault();
     genreToCountLongRange = genreParser.getGenresFromSpotify(20, Consts.LONG_INPUT);
@@ -138,8 +138,8 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_DefaultCompareTwentyAndTimeRangeShort_NotTheSame() {
-    Map<String, Integer> defaultGenreToCount;
-    Map<String, Integer> genreToCountShortRange;
+    Map<String, String> defaultGenreToCount;
+    Map<String, String> genreToCountShortRange;
 
     defaultGenreToCount = genreParser.getGenresFromDefault();
     genreToCountShortRange = genreParser.getGenresFromSpotify(20, Consts.SHORT_INPUT);
@@ -150,8 +150,8 @@ public class GenreReaderTest {
 
   @Test
   public void Genre_DefaultCompareTwentyAndTimeRangeLong_NotTheSame() {
-    Map<String, Integer> defaultGenreToCount;
-    Map<String, Integer> genreToCountLongRange;
+    Map<String, String> defaultGenreToCount;
+    Map<String, String> genreToCountLongRange;
 
     defaultGenreToCount = genreParser.getGenresFromDefault();
     genreToCountLongRange = genreParser.getGenresFromSpotify(20, Consts.LONG_INPUT);

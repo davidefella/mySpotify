@@ -1,5 +1,6 @@
 package mySpotify.mapper;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,16 +19,48 @@ public class GenreMapper {
 
   Logger logger = LoggerFactory.getLogger(MySpotifyApplication.class);
 
-  public Map<String, Integer> countGenreFromArtists(List<Items> artists) {
+  public Map<String, String> countGenreFromArtists(List<Items> artists) {
+    Map<String, String> countPercentage = new HashMap<>();
 
-    Map<String, Integer> allGenreToCounting = countAllGenresFromArtists(artists);
-    Map<String, Integer> genreGrouped = groupMusicGenre(allGenreToCounting);
+    countPercentage = genresCountingToPercentage(countAllGenresFromArtists(artists));
 
-    return genreGrouped;
+    return countPercentage;
 
   }
 
-  private Map<String, Integer> countAllGenresFromArtists(List<Items> artists) {
+  private Map<String, String> genresCountingToPercentage(Map<String, Integer> allGenreToCounting) {
+    Map<String, String> mapsPercentage = new HashMap<>();
+
+    Map<String, Integer> genreGrouped = groupMusicGenre(allGenreToCounting);
+
+    int tot = sumAllGenreCount(genreGrouped);
+
+    int genrePercentage;
+    for (String s : genreGrouped.keySet()) {
+      genrePercentage = (genreGrouped.get(s) * 100) / tot;
+
+      mapsPercentage.put(s, (String.valueOf(genrePercentage).concat("%")));
+    }
+
+    return mapsPercentage;
+  }
+
+  private int sumAllGenreCount(Map<String, Integer> mapsGrouped) {
+    int sum = 0;
+
+    Collection<Integer> counts = mapsGrouped.values();
+
+    for (Integer i : counts) {
+      sum = sum + i;
+    }
+
+    logger.info("Sum: " + sum);
+
+    return sum;
+  }
+
+
+  public Map<String, Integer> countAllGenresFromArtists(List<Items> artists) {
     Map<String, Integer> genreToCounting = new HashMap<>();
     CountingGenreComparator countingGenreComparator = new CountingGenreComparator(genreToCounting);
 
@@ -45,7 +78,7 @@ public class GenreMapper {
       }
     }
 
-    Map<String, Integer> newMap = new TreeMap<String, Integer>(countingGenreComparator);
+    Map<String, Integer> newMap = new TreeMap<>(countingGenreComparator);
     newMap.putAll(genreToCounting);
 
     return newMap;
@@ -101,6 +134,4 @@ public class GenreMapper {
 
     return superGenre;
   }
-
-
 }

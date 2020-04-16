@@ -19,13 +19,13 @@ public class GenreReaderImpl implements GenreReader {
   MongoTemplate mongoTemplate;
 
   @RequestMapping(value = "v1/genres")
-  public Map<String, Integer> getGenres() {
+  public Map<String, String> getGenres() {
 
     String endPoint = "v1/genres";
 
     mongoTemplate.save(new ServiceLog("", endPoint, "IN"));
 
-    Map<String, Integer> genres2count = genreParse.getGenresFromDefault();
+    Map<String, String> genres2count = genreParse.getGenresFromDefault();
 
     mongoTemplate.save(new ServiceLog(genres2count.toString(), endPoint, "OUT"));
 
@@ -33,13 +33,13 @@ public class GenreReaderImpl implements GenreReader {
   }
 
   @RequestMapping(value = "v1/genres", params = "timeRange")
-  public Map<String, Integer> getGenre(String timeRange) {
+  public Map<String, String> getGenre(String timeRange) {
 
     String endPoint = "v1/genres?timeRange" + timeRange;
 
     mongoTemplate.save(new ServiceLog("", endPoint, "IN"));
 
-    Map<String, Integer> genres2count = genreParse.getGenresFromSpotify(timeRange);
+    Map<String, String> genres2count = genreParse.getGenresFromSpotify(timeRange);
 
     mongoTemplate.save(new ServiceLog(genres2count.toString(), endPoint, "OUT"));
 
@@ -47,13 +47,13 @@ public class GenreReaderImpl implements GenreReader {
   }
 
   @RequestMapping(value = "v1/genres", params = "artistsNumber")
-  public Map<String, Integer> getGenre(int artistsNumber) {
+  public Map<String, String> getGenre(int artistsNumber) {
 
     String endPoint = "v1/genres?artistsNumber" + artistsNumber;
 
     mongoTemplate.save(new ServiceLog("", endPoint, "IN"));
 
-    Map<String, Integer> genres2count = genreParse.getGenresFromSpotify(artistsNumber);
+    Map<String, String> genres2count = genreParse.getGenresFromSpotify(artistsNumber);
 
     mongoTemplate.save(new ServiceLog(genres2count.toString(), endPoint, "OUT"));
 
@@ -62,12 +62,12 @@ public class GenreReaderImpl implements GenreReader {
   }
 
   @RequestMapping(value = "v1/genres", params = {"artistsNumber", "timeRange"})
-  public Map<String, Integer> getGenre(int artistsNumber, String timeRange) {
+  public Map<String, String> getGenre(int artistsNumber, String timeRange) {
     String endPoint = "v1/genres?artistsNumber" + artistsNumber + "&timeRange" + timeRange;
 
     mongoTemplate.save(new ServiceLog("", endPoint, "IN"));
 
-    Map<String, Integer> genres2count = genreParse.getGenresFromSpotify(artistsNumber, timeRange);
+    Map<String, String> genres2count = genreParse.getGenresFromSpotify(artistsNumber, timeRange);
 
     mongoTemplate.save(new ServiceLog(genres2count.toString(), endPoint, "OUT"));
 
