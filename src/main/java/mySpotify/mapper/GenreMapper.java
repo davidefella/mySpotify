@@ -57,7 +57,6 @@ public class GenreMapper {
     return sum;
   }
 
-
   public Map<String, Integer> countAllGenresFromArtists(List<Items> artists) {
     Map<String, Integer> genreToCounting = new HashMap<>();
     CountingGenreComparator countingGenreComparator = new CountingGenreComparator(genreToCounting);
