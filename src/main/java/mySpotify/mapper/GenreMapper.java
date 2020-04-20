@@ -28,7 +28,7 @@ public class GenreMapper {
 
   }
 
-  private Map<String, String> genresCountingToPercentage(Map<String, Integer> allGenreToCounting) {
+  public Map<String, String> genresCountingToPercentage(Map<String, Integer> allGenreToCounting) {
     Map<String, String> mapsPercentage = new HashMap<>();
 
     Map<String, Integer> genreGrouped = groupMusicGenre(allGenreToCounting);
@@ -53,8 +53,6 @@ public class GenreMapper {
     for (Integer i : counts) {
       sum = sum + i;
     }
-
-    logger.info("Sum: " + sum);
 
     return sum;
   }
@@ -105,6 +103,7 @@ public class GenreMapper {
     return countMusicGenres;
   }
 
+  /*@TODO: Improve this function*/
   private String getGenreGrouped(String genre) {
     String superGenre = "other";
 

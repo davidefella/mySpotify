@@ -1,7 +1,9 @@
 package mySpotify.parser;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import mySpotify.mapper.GenreMapper;
 import mySpotify.util.Consts;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,9 @@ public class GenreReaderTest {
 
   @Autowired
   GenreParser genreParser;
+
+  @Autowired
+  GenreMapper genreMapper;
 
   @Test
   public void Genre_Default_isNotNull() {
@@ -66,7 +71,6 @@ public class GenreReaderTest {
     Assert.assertNotNull(genreToCount.keySet());
   }
 
-
   @Test
   public void Genre_TimeRangeMedium_KeySetNotNull() {
     Map<String, String> genreToCount;
@@ -94,8 +98,8 @@ public class GenreReaderTest {
     genreToCountMediumRange = genreParser.getGenresFromSpotify(Consts.MEDIUM_INPUT);
 
     Assert.assertTrue(
-        defaultGenreToCount.keySet().toString()
-            .equals(genreToCountMediumRange.keySet().toString()));
+        defaultGenreToCount.values().toString()
+            .equals(genreToCountMediumRange.values().toString()));
   }
 
   @Test
@@ -107,8 +111,8 @@ public class GenreReaderTest {
     genreToCountMediumRange = genreParser.getGenresFromSpotify(20, Consts.MEDIUM_INPUT);
 
     Assert.assertTrue(
-        defaultGenreToCount.keySet().toString()
-            .equals(genreToCountMediumRange.keySet().toString()));
+        defaultGenreToCount.values().toString()
+            .equals(genreToCountMediumRange.values().toString()));
   }
 
   @Test
@@ -120,7 +124,7 @@ public class GenreReaderTest {
     genreToCountShortRange = genreParser.getGenresFromSpotify(20, Consts.SHORT_INPUT);
 
     Assert.assertFalse(
-        defaultGenreToCount.keySet().toString().equals(genreToCountShortRange.keySet().toString()));
+        defaultGenreToCount.values().toString().equals(genreToCountShortRange.values().toString()));
   }
 
   @Test
@@ -132,8 +136,8 @@ public class GenreReaderTest {
     genreToCountLongRange = genreParser.getGenresFromSpotify(20, Consts.LONG_INPUT);
 
     Assert
-        .assertFalse(defaultGenreToCount.keySet().toString()
-            .equals(genreToCountLongRange.keySet().toString()));
+        .assertFalse(defaultGenreToCount.values().toString()
+            .equals(genreToCountLongRange.values().toString()));
   }
 
   @Test
@@ -145,7 +149,7 @@ public class GenreReaderTest {
     genreToCountShortRange = genreParser.getGenresFromSpotify(20, Consts.SHORT_INPUT);
 
     Assert.assertFalse(
-        defaultGenreToCount.keySet().toString().equals(genreToCountShortRange.keySet().toString()));
+        defaultGenreToCount.values().toString().equals(genreToCountShortRange.values().toString()));
   }
 
   @Test
@@ -157,7 +161,57 @@ public class GenreReaderTest {
     genreToCountLongRange = genreParser.getGenresFromSpotify(20, Consts.LONG_INPUT);
 
     Assert
-        .assertFalse(defaultGenreToCount.keySet().toString()
-            .equals(genreToCountLongRange.keySet().toString()));
+        .assertFalse(defaultGenreToCount.values().toString()
+            .equals(genreToCountLongRange.values().toString()));
+  }
+
+  @Test
+  public void Genre_CountingToPercentage_counted99() {
+    Map<String, Integer> mapWithCounting;
+    Map<String, String> mapResult;
+    int valuesSumPercentage = 0;
+
+    mapWithCounting = createMapTesting99Percent();
+    mapResult = genreMapper.genresCountingToPercentage(mapWithCounting);
+
+    for (String s : mapResult.keySet()) {
+      valuesSumPercentage =
+          valuesSumPercentage + Integer.valueOf(mapResult.get(s).replace("%", ""));
+    }
+
+    Assert.assertEquals(valuesSumPercentage, 99);
+  }
+
+  @Test
+  public void Genre_CountingToPercentage_counteZero() {
+    Map<String, Integer> mapWithCounting;
+    Map<String, String> mapResult;
+    int valuesSumPercentage = 0;
+
+    mapWithCounting = createMapTestingEmpy();
+    mapResult = genreMapper.genresCountingToPercentage(mapWithCounting);
+
+    for (String s : mapResult.keySet()) {
+      valuesSumPercentage =
+          valuesSumPercentage + Integer.valueOf(mapResult.get(s).replace("%", ""));
+    }
+
+    Assert.assertEquals(valuesSumPercentage, 0);
+  }
+
+  private Map<String, Integer> createMapTesting99Percent() {
+    Map<String, Integer> maps2Counting = new HashMap<String, Integer>();
+
+    maps2Counting.put("pop", 50);
+    maps2Counting.put("rock", 50);
+    maps2Counting.put("grunge", 50);
+
+    return maps2Counting;
+  }
+
+  private Map<String, Integer> createMapTestingEmpy() {
+    Map<String, Integer> maps2Counting = new HashMap<String, Integer>();
+
+    return maps2Counting;
   }
 }
