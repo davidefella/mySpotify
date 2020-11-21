@@ -2,7 +2,6 @@ package mySpotify.parser;
 
 import java.util.List;
 import mySpotify.mapper.TracksMapper;
-import mySpotify.model.Tracks.Items;
 import mySpotify.spotify.service.api.TracksSpotifyReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

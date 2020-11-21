@@ -3,7 +3,6 @@ package mySpotify.controller.impl;
 import java.util.List;
 import mySpotify.controller.api.TracksReader;
 import mySpotify.model.logs.ServiceLog;
-import mySpotify.parser.ArtistsParser;
 import mySpotify.parser.TracksParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
