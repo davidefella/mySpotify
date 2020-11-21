@@ -31,3 +31,7 @@ build/
 gradle-app.setting
 
 log/
+
+.project
+.settings
+application.properties
