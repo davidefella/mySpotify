@@ -80,7 +80,7 @@ https://developer.spotify.com/documentation/general/guides/authorization-guide/
 Tests are with JUnit, and there are tests for the spotify's APIs results 
 
 ## Contribute
-Do you want join in the project and contribute? Feel free to fork the project or write me if you want some clarification : ) 
+Do you want join in the project and contribute? Feel free to fork the project or write me if you want some clarification :) 
 
 ## License
 MIT ©
