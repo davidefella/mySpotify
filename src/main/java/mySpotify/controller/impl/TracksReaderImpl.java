@@ -5,10 +5,11 @@ import mySpotify.controller.api.TracksReader;
 import mySpotify.model.logs.ServiceLog;
 import mySpotify.parser.TracksParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import mySpotify.logging.LogManager;
 
 @RestController
 public class TracksReaderImpl implements TracksReader {
@@ -17,18 +18,18 @@ public class TracksReaderImpl implements TracksReader {
   TracksParser tracksParser;
 
   @Autowired
-  MongoTemplate mongoTemplate;
-
+  LogManager logManager;
+  
   @RequestMapping(value = "v1/tracks")
   public List<String> getDefaultTracks() {
 
     String endPoint = "v1/tracks";
 
-    mongoTemplate.save(new ServiceLog("", endPoint, "IN"));
+    logManager.save("", endPoint, "IN");
 
     List<String> tracks = tracksParser.getDefaultTracksFromSpotify();
 
-    mongoTemplate.save(new ServiceLog(tracks.toString(), endPoint, "OUT"));
+    logManager.save(tracks.toString(), endPoint, "OUT");
 
     return tracks;
 
@@ -39,11 +40,11 @@ public class TracksReaderImpl implements TracksReader {
 
     String endPoint = "v1/tracks?tracksNumber" + tracksNumber;
 
-    mongoTemplate.save(new ServiceLog("", endPoint, "IN"));
+    logManager.save("", endPoint, "IN");
 
     List<String> tracks = tracksParser.getTracksFromSpotify(tracksNumber);
 
-    mongoTemplate.save(new ServiceLog(tracks.toString(), endPoint, "OUT"));
+    logManager.save(tracks.toString(), endPoint, "OUT");
 
     return tracks;
   }
@@ -53,11 +54,11 @@ public class TracksReaderImpl implements TracksReader {
 
     String endPoint = "v1/tracks?timeRange" + timeRange;
 
-    mongoTemplate.save(new ServiceLog("", endPoint, "IN"));
+    logManager.save("", endPoint, "IN");
 
     List<String> tracks = tracksParser.getTracksFromSpotify(timeRange);
 
-    mongoTemplate.save(new ServiceLog(tracks.toString(), endPoint, "OUT"));
+    logManager.save(tracks.toString(), endPoint, "OUT");
 
     return tracks;
   }
@@ -67,11 +68,11 @@ public class TracksReaderImpl implements TracksReader {
 
     String endPoint = "v1/tracks?timeRange" + timeRange + "&tracksNumber" + tracksNumber;
 
-    mongoTemplate.save(new ServiceLog("", endPoint, "IN"));
+    logManager.save("", endPoint, "IN");
 
     List<String> tracks = tracksParser.getTracksFromSpotify(tracksNumber, timeRange);
 
-    mongoTemplate.save(new ServiceLog(tracks.toString(), endPoint, "OUT"));
+    logManager.save(tracks.toString(), endPoint, "OUT");
 
     return tracks;
   }
