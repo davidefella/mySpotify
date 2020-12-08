@@ -41,3 +41,5 @@ application.properties
 bin
 
 .classpath
+
+.vscode
