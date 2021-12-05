@@ -3,7 +3,6 @@ package mySpotify.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +20,6 @@ public final class TokenGenerator {
   @Autowired
   MySpotifyUtils mySpotifyUtils;
 
-  @Value("${authorization_code}")
-  private String authorizationCode;
-
   @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
   public String getBearerToken() {
 
@@ -39,9 +35,10 @@ public final class TokenGenerator {
     SpotifyAuthResponse spotifyAuthResponse = new SpotifyAuthResponse();
 
     final String GRANT_TYPE = "refresh_token";
+    String authorizationCode = "NjA1ZTgxNzIzMDRmNDM0MWFlNGEzMWI4MmFjMzdkYjI6NmMxYjBmOTA5YzNmNGQwNzk3Y2YyNjU0NTdhZmVhMmU=";
 
     HttpHeaders headers = new HttpHeaders();
-    headers.set("Authorization", "Basic " + readAuthenticationCode());
+    headers.set("Authorization", "Basic " + authorizationCode);
 
     LinkedMultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
     paramsMap.add("grant_type", GRANT_TYPE);
@@ -62,10 +59,5 @@ public final class TokenGenerator {
     }
 
     return spotifyAuthResponse;
-  }
-
-  public String readAuthenticationCode() {
-
-    return authorizationCode;
   }
 }
