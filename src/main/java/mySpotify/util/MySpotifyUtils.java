@@ -35,12 +35,6 @@ public class MySpotifyUtils {
 	@Value("${authorization_code}")
 	private String authorizationCode;
 
-//  @Autowired
-//  TokenGenerator tokenGenerator;
-
-//  @Autowired
-//  MySpotifyUtils mySpotifyUtils;
-
 	public String buildResponseEntity(UriComponentsBuilder builder) {
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -69,11 +63,6 @@ public class MySpotifyUtils {
 		} else {
 			return Consts.SPOTIFY_LONG_TERM;
 		}
-	}
-
-	public String readRefreshToken() {
-
-		return refreshToken;
 	}
 
 	public String readTracksEndpoints() {
@@ -120,8 +109,6 @@ public class MySpotifyUtils {
 	@PostMapping(path = "/", consumes = "application/json", produces = "application/json")
 	public String getBearerToken() {
 
-		String refreshToken = readRefreshToken();
-
 		spotifyAuthResponse = this.getNewBearerTokenFromRefreshToken(refreshToken);
 
 		return spotifyAuthResponse.getAccess_token();
@@ -133,7 +120,7 @@ public class MySpotifyUtils {
 		final String GRANT_TYPE = "refresh_token";
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Authorization", "Basic " + readAuthenticationCode());
+		headers.set("Authorization", "Basic " + authorizationCode);
 
 		LinkedMultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
 		paramsMap.add("grant_type", GRANT_TYPE);
@@ -154,10 +141,4 @@ public class MySpotifyUtils {
 
 		return spotifyAuthResponse;
 	}
-
-	public String readAuthenticationCode() {
-
-		return authorizationCode;
-	}
-
 }
